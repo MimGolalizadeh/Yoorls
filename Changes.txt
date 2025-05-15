@@ -1,0 +1,2 @@
+The changes are:
+the landing page has 8 columns and new item after each row go to new row

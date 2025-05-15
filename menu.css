@@ -1,0 +1,74 @@
+/* menu.css - Refactored to use CSS Variables */
+/* This file seems to be used by landing.html as well. */
+/* Styles here might be overridden or conflict if not carefully managed with new-style.css and landing.css */
+
+/* General body styles, assuming this might be for a specific menu context if not the main popup/landing */
+/* If this menu.css is applied to the same body as new-style.css or landing.css, these body rules might conflict or be redundant. */
+/* For now, we will assume it's for a distinct context or that specificity will handle it. */
+body.menu-context { /* Added a hypothetical class to scope if needed, or apply to specific elements */
+  font-family: var(--font-family-sans-serif);
+  width: auto;
+  margin: 0;
+  padding: var(--spacing-base);
+  background-color: var(--body-bg); /* Using theme variable */
+  text-align: center;
+}
+
+/* General h1 styles within this context */
+h1.menu-title {
+  color: var(--body-color); /* Using theme variable */
+  margin-bottom: var(--spacing-base);
+}
+
+/* Button styles in menu.css. These might need to be harmonized with .btn styles in new-style.css and landing.css */
+.btn-menu {
+  width: 100%;
+  padding: 12px; /* Consider var(--btn-padding-y) */
+  margin: 10px 0; /* Consider var(--btn-margin-y) */
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.1s ease, border-color 0.3s ease;
+}
+
+.btn-menu:hover {
+  transform: translateY(-2px);
+}
+
+.btn-menu:active {
+  transform: translateY(0);
+}
+
+/* Original .primary in menu.css was green. We map it to the theme's primary button. */
+.btn-menu.primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-color);
+  border-color: var(--btn-primary-border-color);
+}
+
+.btn-menu.primary:hover {
+  background-color: var(--btn-primary-hover-bg);
+  border-color: var(--btn-primary-hover-border-color);
+}
+
+/* Original .secondary in menu.css was light grey. We map it to the theme's light button. */
+.btn-menu.secondary {
+  background-color: var(--btn-light-bg);
+  color: var(--btn-light-color);
+  border-color: var(--btn-light-border-color);
+}
+
+.btn-menu.secondary:hover {
+  background-color: var(--btn-light-hover-bg);
+  border-color: var(--btn-light-hover-border-color);
+}
+
+/* Status message styling, if applicable in menu context */
+#status-message-menu {
+  margin-top: var(--spacing-base);
+  font-size: calc(var(--font-size-base) * 0.875);
+  color: var(--body-color);
+  /* Assuming it might not have a card-like background like in popup */
+}

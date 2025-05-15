@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoorls - Saved URLs</title>
+    <link rel="stylesheet" type="text/css" href="landing.css">
+    <link rel="stylesheet" type="text/css" href="menu.css"> <!-- This is still linked, ensure its styles are compatible or scoped -->
+    <link rel="stylesheet" type="text/css" href="themes.css"> <!-- Added themes.css -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header-controls">
+        <h1>Yoorls</h1>
+        <div class="theme-switcher">
+            <label for="theme-select">Theme:</label>
+            <select id="theme-select">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="page-controls">
+        <div class="search-sort">
+            <input type="text" id="search-input" placeholder="Search URLs...">
+            <select id="sort-select">
+                <option value="name-asc">Name (A-Z) </option>
+                <option value="name-desc">Name (Z-A)</option>
+                <option value="date-asc">Date Added (Oldest First)</option>
+                <option value="date-desc">Date Added (Newest First)</option>
+            </select>
+        </div>
+
+        <div class="manual-add-section">
+            <h2>Add Manually</h2>
+            <input type="text" id="manual-url" placeholder="URL (e.g., https://example.com) ">
+            <input type="text" id="manual-name" placeholder="Name (Optional - short name preferred)">
+            <select id="manual-category">
+                <!-- Categories will be populated here -->
+            </select>
+            <input type="text" id="new-category-name" placeholder="New Category Name" style="display: none;">
+            <button id="add-manual-url" class="btn primary">Add URL</button>
+        </div>
+
+        <button id="add-category" class="btn secondary">Add New Category</button> 
+    </div>
+
+    <hr>
+
+    <div class="categories-container" id="categories-container">
+        <!-- Categories will be dynamically added here -->
+    </div>
+
+    <script src="landing.js"></script>
+    <script src="theme_manager.js"></script> <!-- Added theme manager script -->
+</body>
+</html>

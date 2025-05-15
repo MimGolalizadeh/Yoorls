@@ -1,0 +1,81 @@
+/* new-style.css - Refactored to use CSS Variables */
+body {
+  font-family: var(--font-family-sans-serif);
+  width: 300px;
+  margin: 0;
+  padding: var(--spacing-base);
+  background-color: var(--body-bg);
+  color: var(--body-color);
+  text-align: center;
+}
+
+h1 {
+  color: var(--body-color);
+  margin-bottom: var(--spacing-base);
+}
+
+.btn {
+  width: 100%;
+  padding: 12px; /* This could be a variable e.g., --btn-padding-y */
+  margin: 10px 0; /* This could be a variable e.g., --btn-margin-y */
+  border: 1px solid transparent; /* Base border, specific buttons will override */
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.1s ease, border-color 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* In the original new-style.css, .primary was a light button */
+.btn.primary { /* This will now be styled as a light/default button from themes.css */
+  background-color: var(--btn-light-bg);
+  color: var(--btn-light-color);
+  border-color: var(--btn-light-border-color);
+}
+
+.btn.primary:hover {
+  background-color: var(--btn-light-hover-bg);
+  border-color: var(--btn-light-hover-border-color);
+}
+
+/* In the original new-style.css, .secondary was a greyish button */
+.btn.secondary { /* This will now be styled as a secondary button from themes.css */
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-color);
+  border-color: var(--btn-secondary-border-color);
+}
+
+.btn.secondary:hover {
+  background-color: var(--btn-secondary-hover-bg);
+  border-color: var(--btn-secondary-hover-border-color);
+}
+
+/* Adding a new primary style based on Tabler\'s primary button */
+.btn.action-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-color);
+  border-color: var(--btn-primary-border-color);
+}
+
+.btn.action-primary:hover {
+  background-color: var(--btn-primary-hover-bg);
+  border-color: var(--btn-primary-hover-border-color);
+}
+
+#status-message {
+  margin-top: var(--spacing-base);
+  font-size: calc(var(--font-size-base) * 0.875); /* 14px if base is 16px */
+  color: var(--body-color);
+  background-color: var(--card-bg);
+  padding: calc(var(--spacing-base) * 0.75);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--card-border-color);
+}

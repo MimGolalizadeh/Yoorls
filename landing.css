@@ -1,0 +1,374 @@
+/* landing.css - Refactored to use CSS Variables */
+
+body {
+    font-family: var(--font-family-sans-serif);
+    margin: 0;
+    padding: calc(var(--spacing-base) * 1.25); /* 20px if base is 16px */
+    background-color: var(--body-bg);
+    width: 100%;
+    box-sizing: border-box;
+    color: var(--body-color);
+}
+
+h1 {
+    color: var(--body-color);
+    text-align: center;
+    margin-bottom: calc(var(--spacing-base) * 1.25);
+}
+
+/* Controls Section */
+.page-controls {
+    background-color: var(--card-bg);
+    padding: calc(var(--spacing-base) * 0.9375); /* 15px */
+    border-radius: var(--border-radius);
+    margin-bottom: calc(var(--spacing-base) * 1.25);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Consider a shadow variable if Tabler has one */
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing-base) * 0.9375);
+    align-items: flex-start;
+    border: 1px solid var(--card-border-color);
+}
+
+.search-sort {
+    display: flex;
+    gap: calc(var(--spacing-base) * 0.625); /* 10px */
+    flex-grow: 1;
+    min-width: 250px;
+}
+
+#search-input {
+    flex-grow: 1;
+    padding: calc(var(--spacing-base) * 0.5) calc(var(--spacing-base) * 0.625); /* 8px 10px */
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius);
+    font-size: calc(var(--font-size-base) * 0.875); /* 14px */
+    background-color: var(--input-bg);
+    color: var(--body-color);
+}
+#search-input:focus {
+    border-color: var(--input-focus-border-color);
+    outline: none;
+}
+
+#sort-select {
+    padding: calc(var(--spacing-base) * 0.5) calc(var(--spacing-base) * 0.625);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius);
+    font-size: calc(var(--font-size-base) * 0.875);
+    background-color: var(--input-bg);
+    color: var(--body-color);
+    cursor: pointer;
+}
+
+.manual-add-section {
+    border: 1px solid var(--border-color);
+    padding: calc(var(--spacing-base) * 0.9375);
+    border-radius: var(--border-radius);
+    background-color: var(--card-bg); /* Changed from #f9f9f9 to card-bg for theme consistency */
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing-base) * 0.625);
+    min-width: 280px;
+}
+
+.manual-add-section h2 {
+    margin: 0 0 calc(var(--spacing-base) * 0.625) 0;
+    font-size: calc(var(--font-size-base) * 1.1);
+    color: var(--body-color);
+    text-align: center;
+}
+
+.manual-add-section input[type="text"],
+.manual-add-section select {
+    padding: calc(var(--spacing-base) * 0.5) calc(var(--spacing-base) * 0.625);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius);
+    font-size: calc(var(--font-size-base) * 0.875);
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--body-color);
+}
+.manual-add-section input[type="text"]:focus,
+.manual-add-section select:focus {
+    border-color: var(--input-focus-border-color);
+    outline: none;
+}
+
+#add-manual-url {
+    margin-top: calc(var(--spacing-base) * 0.3125); /* 5px */
+}
+
+/* General Button Styling - harmonizing with theme.css buttons */
+.btn {
+    padding: calc(var(--spacing-base) * 0.5) calc(var(--spacing-base) * 0.9375); /* 8px 15px */
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: calc(var(--font-size-base) * 0.875);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    text-align: center;
+    font-weight: 500;
+}
+
+.btn.primary { /* Maps to theme\s primary button */
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-color);
+    border-color: var(--btn-primary-border-color);
+}
+
+.btn.primary:hover {
+    background-color: var(--btn-primary-hover-bg);
+    border-color: var(--btn-primary-hover-border-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Consider a shadow variable */
+}
+
+.btn.secondary { /* Maps to theme\s secondary button (was a light blueish in original) */
+    background-color: var(--btn-secondary-bg);
+    color: var(--btn-secondary-color);
+    border-color: var(--btn-secondary-border-color);
+}
+
+.btn.secondary:hover {
+    background-color: var(--btn-secondary-hover-bg);
+    border-color: var(--btn-secondary-hover-border-color);
+}
+
+/* For buttons that should look like Tabler\s light buttons */
+.btn.light {
+    background-color: var(--btn-light-bg);
+    color: var(--btn-light-color);
+    border-color: var(--btn-light-border-color);
+}
+
+.btn.light:hover {
+    background-color: var(--btn-light-hover-bg);
+    border-color: var(--btn-light-hover-border-color);
+}
+
+#add-category {
+    align-self: center;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: calc(var(--spacing-base) * 1.5625) 0; /* 25px */
+}
+
+/* Categories Container */
+.categories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing-base) * 1.25); /* 20px */
+    padding: 0;
+}
+
+/* Individual Category Styling */
+.category {
+    border: 1px solid var(--card-border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--card-bg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    flex: 0 0 280px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(var(--spacing-base) * 0.625) calc(var(--spacing-base) * 0.9375); /* 10px 15px */
+    border-bottom: 1px solid var(--card-border-color);
+    background-color: var(--card-header-bg);
+    color: var(--card-header-color);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    flex-shrink: 0;
+}
+
+.category-header h2 {
+    margin: 0;
+    font-size: calc(var(--font-size-base) * 1.15);
+    color: var(--card-header-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: calc(var(--spacing-base) * 0.625);
+}
+
+.category-menu {
+    cursor: pointer;
+    padding: calc(var(--spacing-base) * 0.3125); /* 5px */
+    font-size: calc(var(--font-size-base) * 1.125); /* 18px */
+    color: var(--body-color); /* Was #888 */
+    opacity: 0.7;
+    border-radius: 50%;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.category-menu:hover {
+    background-color: var(--btn-light-hover-bg); /* Using a button hover for interactive element */
+    color: var(--link-hover-color);
+    opacity: 1;
+}
+
+/* URL List Styling */
+.url-list {
+    list-style-type: none;
+    margin: 0;
+    padding: calc(var(--spacing-base) * 0.625) calc(var(--spacing-base) * 0.9375);
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+/* Individual URL Item Styling */
+.url-item {
+    display: flex;
+    align-items: center;
+    padding: calc(var(--spacing-base) * 0.5) calc(var(--spacing-base) * 0.3125); /* 8px 5px */
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+    cursor: grab;
+}
+
+.url-item:last-child {
+    border-bottom: none;
+}
+
+.url-item:hover {
+    background-color: var(--btn-light-hover-bg); /* A subtle hover, like a list item hover */
+}
+
+.url-item .favicon {
+    width: 16px;
+    height: 16px;
+    margin-right: calc(var(--spacing-base) * 0.625);
+    flex-shrink: 0;
+}
+
+.url-item .url-link {
+    flex-grow: 1;
+    font-size: calc(var(--font-size-base) * 0.875);
+    color: var(--link-color);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: calc(var(--spacing-base) * 0.625);
+}
+
+.url-item .url-link:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+.url-item .remove-url-btn {
+    background: none;
+    border: none;
+    color: var(--body-color); /* Was #aaa */
+    cursor: pointer;
+    font-size: calc(var(--font-size-base) * 1.125);
+    padding: 0 calc(var(--spacing-base) * 0.3125);
+    line-height: 1;
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.url-item:hover .remove-url-btn {
+    opacity: 1;
+}
+
+.url-item .remove-url-btn:hover {
+    color: #ff0000; /* Danger color, can be a variable too e.g. --danger-color */
+}
+
+/* Drag and Drop Styling */
+.url-item.dragging {
+    opacity: 0.5;
+    background-color: var(--btn-primary-hover-bg); /* Using a theme color for dragging feedback */
+    color: var(--btn-primary-color);
+    cursor: grabbing;
+}
+
+.category.drag-over {
+    border-color: var(--link-color); /* Highlight border of drop target with theme color */
+    box-shadow: 0 0 8px rgba(32, 107, 196, 0.3); /* Shadow based on primary color, consider variable */
+}
+
+/* Context Menu Styling */
+.context-menu-style {
+    position: absolute;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: calc(var(--spacing-base) * 0.3125) 0;
+    z-index: 1000;
+    min-width: 150px;
+}
+
+.context-menu-style ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.context-menu-style li {
+    padding: calc(var(--spacing-base) * 0.5) calc(var(--spacing-base) * 0.9375);
+    cursor: pointer;
+    font-size: calc(var(--font-size-base) * 0.875);
+    color: var(--body-color);
+    white-space: nowrap;
+}
+
+.context-menu-style li:hover {
+    background-color: var(--btn-light-hover-bg);
+    color: var(--link-hover-color);
+}
+
+.context-menu-style li.danger {
+    color: #d9534f; /* Standard danger color, can be a variable */
+}
+
+.context-menu-style li.danger:hover {
+    background-color: #f2dede; /* Lighter danger hover */
+    color: #a94442;
+}
+
+/* Responsive Adjustments - kept as is, as they relate to layout not colors primarily */
+@media (max-width: 992px) {}
+
+@media (max-width: 768px) {
+    .page-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-sort {
+        flex-direction: column;
+    }
+    #add-category {
+        align-self: auto;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: calc(var(--spacing-base) * 0.625);
+    }
+    h1 {
+        font-size: calc(var(--font-size-base) * 1.5);
+    }
+    .page-controls {
+        padding: calc(var(--spacing-base) * 0.625);
+    }
+    .manual-add-section {
+        padding: calc(var(--spacing-base) * 0.625);
+    }
+}

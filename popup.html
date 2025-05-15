@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yoorls</title>
+    <link rel="stylesheet" type="text/css" href="new-style.css">
+    <link rel="stylesheet" type="text/css" href="themes.css"> <!-- Added themes.css -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header-controls">
+        <h1>Yoorls</h1>
+        <div class="theme-switcher">
+            <label for="theme-select">Theme:</label>
+            <select id="theme-select">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <!-- Add more theme options here if needed -->
+            </select>
+        </div>
+    </div>
+
+    <button id="save-url" class="btn primary">Save Current URL</button>
+    <button id="open-landing" class="btn secondary">View Saved URLs</button>
+
+    <hr>
+
+    <h2>Data Management</h2>
+    <div class="data-management">
+        <button id="export-urls" class="btn secondary">Export Data</button>
+        <input type="file" id="import-urls" accept=".json" style="display: none;">
+        <button id="import-button" class="btn secondary">Import Data</button>
+    </div>
+
+    <div id="status-message"></div>
+    <script src="popup.js"></script>
+    <script src="theme_manager.js"></script> <!-- Added theme manager script -->
+</body>
+</html>
