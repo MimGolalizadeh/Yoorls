@@ -2,6 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const themeSelect = document.getElementById("theme-select");
+    const themeToggle = document.getElementById("theme-toggle");
     const htmlElement = document.documentElement;
 
     // Function to apply the theme
@@ -22,12 +23,23 @@ document.addEventListener("DOMContentLoaded", () => {
         if (themeSelect) {
             themeSelect.value = savedTheme;
         }
+        if (themeToggle) {
+            themeToggle.checked = savedTheme === "dark";
+        }
     });
 
     // Add event listener to the theme selector dropdown
     if (themeSelect) {
         themeSelect.addEventListener("change", (event) => {
             applyTheme(event.target.value);
+        });
+    }
+
+    // Add event listener to the toggle button
+    if (themeToggle) {
+        themeToggle.addEventListener("change", () => {
+            const theme = themeToggle.checked ? "dark" : "light";
+            applyTheme(theme);
         });
     }
 });

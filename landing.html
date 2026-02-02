@@ -5,54 +5,186 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yoorls - Saved URLs</title>
     <link rel="stylesheet" type="text/css" href="landing.css">
-    <link rel="stylesheet" type="text/css" href="menu.css"> <!-- This is still linked, ensure its styles are compatible or scoped -->
-    <link rel="stylesheet" type="text/css" href="themes.css"> <!-- Added themes.css -->
+    <link rel="stylesheet" type="text/css" href="menu.css">
+    <link rel="stylesheet" type="text/css" href="themes.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header-controls">
-        <h1>Yoorls</h1>
-        <div class="theme-switcher">
-            <label for="theme-select">Theme:</label>
-            <select id="theme-select">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-            </select>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <h1>Yoorls</h1>
         </div>
-    </div>
-
-    <div class="page-controls">
-        <div class="search-sort">
+        
+        <div class="navbar-search">
             <input type="text" id="search-input" placeholder="Search URLs...">
-            <select id="sort-select">
-                <option value="name-asc">Name (A-Z) </option>
+        </div>
+
+        <div class="navbar-controls">
+            <select id="sort-select" class="navbar-select">
+                <option value="name-asc">Name (A-Z)</option>
                 <option value="name-desc">Name (Z-A)</option>
                 <option value="date-asc">Date Added (Oldest First)</option>
                 <option value="date-desc">Date Added (Newest First)</option>
             </select>
-        </div>
-
-        <div class="manual-add-section">
-            <h2>Add Manually</h2>
-            <input type="text" id="manual-url" placeholder="URL (e.g., https://example.com) ">
-            <input type="text" id="manual-name" placeholder="Name (Optional - short name preferred)">
-            <select id="manual-category">
-                <!-- Categories will be populated here -->
+            <select id="columns-select" class="navbar-select" title="Categories per row">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4" selected>4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
             </select>
-            <input type="text" id="new-category-name" placeholder="New Category Name" style="display: none;">
-            <button id="add-manual-url" class="btn primary">Add URL</button>
+            <button id="toggle-add-url" class="navbar-btn" title="Add URL Manually">+ Add URL</button>
+            <button id="add-category" class="navbar-btn" title="Add New Category">+ Category</button>
         </div>
 
-        <button id="add-category" class="btn secondary">Add New Category</button> 
+        <div class="navbar-theme">
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </nav>
+
+    <!-- Main Container with Sidebar -->
+    <div class="main-wrapper">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <!-- All Categories View Section -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">All Categories</div>
+                <button id="view-all-btn" class="sidebar-view-all-btn active">View All</button>
+            </div>
+
+            <!-- Categories List Section -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Categories</div>
+                <ul id="categories-list" class="categories-list">
+                    <!-- Categories will be populated here -->
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Quick Add Section (Collapsible) -->
+            <div class="quick-add-section" id="quick-add-section" style="display: none;">
+                <div class="quick-add-content">
+                    <input type="text" id="manual-url" placeholder="URL (e.g., https://example.com)">
+                    <input type="text" id="manual-name" placeholder="Name (optional)">
+                    <select id="manual-category">
+                        <!-- Categories will be populated here -->
+                    </select>
+                    <input type="text" id="new-category-name" placeholder="New Category Name" style="display: none;">
+                    <button id="add-manual-url" class="navbar-btn">Add URL</button>
+                </div>
+            </div>
+
+            <div class="categories-container" id="categories-container">
+                <!-- Categories will be dynamically added here -->
+            </div>
+        </main>
     </div>
 
-    <hr>
-
-    <div class="categories-container" id="categories-container">
-        <!-- Categories will be dynamically added here -->
+    <!-- Add Category Modal -->
+    <div id="add-category-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Category</h2>
+                <button class="modal-close" id="close-add-category-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="category-name-input">Category Name:</label>
+                    <input type="text" id="category-name-input" placeholder="Enter category name">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save-category" class="btn primary">Add Category</button>
+                <button id="cancel-category" class="btn secondary">Cancel</button>
+            </div>
+        </div>
     </div>
+
+    <!-- Edit URL Modal -->
+    <div id="edit-url-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit URL</h2>
+                <button class="modal-close" id="close-edit-url-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="edit-url-input">URL:</label>
+                    <input type="text" id="edit-url-input" placeholder="Enter URL">
+                </div>
+                <div class="form-group">
+                    <label for="edit-name-input">Name (optional):</label>
+                    <input type="text" id="edit-name-input" placeholder="Leave blank to auto-generate">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save-edit-url" class="btn primary">Save</button>
+                <button id="cancel-edit-url" class="btn secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rename Category Modal -->
+    <div id="rename-category-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Rename Category</h2>
+                <button class="modal-close" id="close-rename-category-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="rename-category-input">Category Name:</label>
+                    <input type="text" id="rename-category-input" placeholder="Enter new category name">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save-rename-category" class="btn primary">Rename</button>
+                <button id="cancel-rename-category" class="btn secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Icon Modal -->
+    <div id="edit-icon-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Icon</h2>
+                <button class="modal-close" id="close-edit-icon-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="edit-icon-input">Icon URL:</label>
+                    <input type="text" id="edit-icon-input" placeholder="Enter icon URL or leave blank for default">
+                </div>
+                <div style="margin-top: 10px; text-align: center;">
+                    <img id="icon-preview" src="" alt="Icon preview" style="width: 48px; height: 48px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save-edit-icon" class="btn primary">Save Icon</button>
+                <button id="cancel-edit-icon" class="btn secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="theme-switcher" style="display: none;">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
 
     <script src="landing.js"></script>
-    <script src="theme_manager.js"></script> <!-- Added theme manager script -->
+    <script src="theme_manager.js"></script>
 </body>
 </html>

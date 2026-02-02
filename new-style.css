@@ -1,17 +1,38 @@
 /* new-style.css - Refactored to use CSS Variables */
 body {
   font-family: var(--font-family-sans-serif);
-  width: 300px;
+  width: 100%;
+  max-width: 380px;
   margin: 0;
   padding: var(--spacing-base);
   background-color: var(--body-bg);
   color: var(--body-color);
   text-align: center;
+  min-width: 300px;
+}
+
+.header-controls {
+  margin-bottom: var(--spacing-base);
 }
 
 h1 {
   color: var(--body-color);
   margin-bottom: var(--spacing-base);
+  margin-top: 0;
+  font-size: calc(var(--font-size-base) * 1.5);
+}
+
+h2 {
+  color: var(--body-color);
+  font-size: calc(var(--font-size-base) * 1.125);
+  margin: calc(var(--spacing-base) * 0.75) 0 calc(var(--spacing-base) * 0.5) 0;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: var(--border-color);
+  margin: var(--spacing-base) 0;
 }
 
 .btn {
@@ -24,6 +45,7 @@ h1 {
   font-size: var(--font-size-base);
   font-weight: 500;
   transition: background-color 0.3s ease, transform 0.1s ease, border-color 0.3s ease;
+  box-sizing: border-box;
 }
 
 .btn:hover {
@@ -70,12 +92,38 @@ h1 {
   border-color: var(--btn-primary-hover-border-color);
 }
 
+.data-management {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-base) * 0.5);
+  margin-bottom: var(--spacing-base);
+}
+
+.data-management .btn {
+  margin: 0;
+}
+
 #status-message {
   margin-top: var(--spacing-base);
+  margin-bottom: var(--spacing-base);
   font-size: calc(var(--font-size-base) * 0.875); /* 14px if base is 16px */
   color: var(--body-color);
   background-color: var(--card-bg);
   padding: calc(var(--spacing-base) * 0.75);
   border-radius: var(--border-radius);
   border: 1px solid var(--card-border-color);
+  display: none;
+  min-height: 20px;
+}
+
+#status-message.show {
+  display: block;
+}
+
+.theme-switcher {
+  margin-top: var(--spacing-base);
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }

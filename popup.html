@@ -1,38 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Yoorls</title>
-    <link rel="stylesheet" type="text/css" href="new-style.css">
-    <link rel="stylesheet" type="text/css" href="themes.css"> <!-- Added themes.css -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Yoorls - URL Manager</title>
+    <link rel="stylesheet" type="text/css" href="popup-minimal.css">
+    <link rel="stylesheet" type="text/css" href="themes.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header-controls">
-        <h1>Yoorls</h1>
-        <div class="theme-switcher">
-            <label for="theme-select">Theme:</label>
-            <select id="theme-select">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <!-- Add more theme options here if needed -->
-            </select>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <div class="page-header">
+            <div class="header-brand">Yoorls</div>
+            <div class="header-actions">
+                <input type="checkbox" id="theme-toggle" class="theme-checkbox">
+                <label for="theme-toggle" class="theme-toggle-btn"></label>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="page-body">
+            <!-- Status Message -->
+            <div id="status-message" class="alert alert-info" role="alert" style="display: none; margin-bottom: 1rem;">
+                <span id="status-text"></span>
+            </div>
+
+            <!-- Primary Actions -->
+            <div class="btn-group">
+                <button id="save-url" class="btn-primary">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    Save Current URL
+                </button>
+                <button id="open-landing" class="btn-primary">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    View Saved URLs
+                </button>
+            </div>
+
+            <!-- Dropdown Menu -->
+            <div class="btn-group">
+                <div class="dropdown">
+                    <button class="btn-dropdown" id="menu-toggle">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <circle cx="19" cy="12" r="1"></circle>
+                            <circle cx="5" cy="12" r="1"></circle>
+                        </svg>
+                        More Options
+                    </button>
+                    <div class="dropdown-menu" id="dropdown-menu">
+                        <button id="export-urls" class="dropdown-item">
+                            <svg class="item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            <span>Export Data</span>
+                        </button>
+                        <input type="file" id="import-urls" accept=".json" style="display: none;">
+                        <button id="import-button" class="dropdown-item">
+                            <svg class="item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <span>Import Data</span>
+                        </button>
+                        <input type="file" id="update-urls" accept=".json" style="display: none;">
+                        <button id="update-button" class="dropdown-item">
+                            <svg class="item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 2.2"></path>
+                            </svg>
+                            <span>Update Data</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <button id="save-url" class="btn primary">Save Current URL</button>
-    <button id="open-landing" class="btn secondary">View Saved URLs</button>
-
-    <hr>
-
-    <h2>Data Management</h2>
-    <div class="data-management">
-        <button id="export-urls" class="btn secondary">Export Data</button>
-        <input type="file" id="import-urls" accept=".json" style="display: none;">
-        <button id="import-button" class="btn secondary">Import Data</button>
-    </div>
-
-    <div id="status-message"></div>
     <script src="popup.js"></script>
-    <script src="theme_manager.js"></script> <!-- Added theme manager script -->
+    <script src="theme_manager.js"></script>
 </body>
 </html>

@@ -2,10 +2,22 @@
     "manifest_version": 3,
     "name": "Yoorls",
     "version": "1.0",
+    "description": "Save and organize your favorite URLs on your new tab page",
     "permissions": ["storage", "activeTab", "scripting"],
+    "homepage_url": "https://raw.githubusercontent.com/MimGolalizadeh/Yoorls/main/privacy-policy.html",
     "action": {
       "default_popup": "popup.html",
-      "default_icon": "icon.png"
+      "default_title": "Yoorls - Save URLs",
+      "default_icons": {
+        "16": "ico.png",
+        "48": "ico.png",
+        "128": "ico.png"
+      }
+    },
+    "icons": {
+      "16": "ico.png",
+      "48": "ico.png",
+      "128": "ico.png"
     },
     "background": {
       "service_worker": "background.js"
